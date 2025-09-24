@@ -85,9 +85,11 @@ Get-ChildItem -Force
 
 ### Step 6: Create run.py File (Launcher)
 
-### Step 7: Modify Your .main File (Add get_data_path function)
+### Step 7: Create run.spec File 
 
-### Step 8: Check the Ports (8502) in use (VERY IMPORTANT!!!!)
+### Step 8: Modify Your .main File (Add get_data_path function)
+
+### Step 9: Check the Ports (8502) in use (VERY IMPORTANT!!!!)
 
 ```powershell
 # 8.1 Check if port is in use
@@ -98,30 +100,39 @@ taskkill /F /IM run.exe
 
 # 8.3 Verify again
 netstat -ano | findstr :8502
+
+# 8.4 Alternative cleanup using CMD on Windows
+rmdir /s /q build dist 2>nul
 ```
 
-### Step 9: Complete Cleaning (Historic Method)
+### Step 10: Complete Cleaning (Historic Method)
 ```powershell
 # 9.1 PowerShell specific cleaning
 Remove-Item -Recurse -Force build, dist -ErrorAction SilentlyContinue
 
 # 9.2 Verify cleaning
 Get-ChildItem -Force
+
+# 9.3 Alternative verification using CMD on Windows
+dir /a
 ```
 
-### Step 10: Build the Executable (With Detailed Log)
+### Step 11: Build the Executable (With Detailed Log)
 ```powershell
 # 10.1 Build with detailed information
 pyinstaller run.spec --log-level INFO
 
-# 10.2 If error occurs, use debug mode
+# 10.2 Alternative CMD Windows (same command)
+pyinstaller run.spec --log-level INFO
+
+# 10.3 If error occurs, use debug mode
 pyinstaller run.spec --log-level DEBUG
 
-# 10.3 Verify if build was successful
+# 10.4 Verify if build was successful
 Get-ChildItem dist
 ```
 
-### Step 11: Test the Executable
+### Step 12: Test the Executable
 ```powershell
 # 11.1 Navigate to dist folder
 cd dist
@@ -132,17 +143,23 @@ Get-ChildItem
 # 11.3 Execute
 .\run.exe
 
-# 11.4 If need to terminate the process
+# 11.4 Alternative CMD Windows execution (example)
+.\dist\run_immo_assist_app.exe
+
+# 11.5 If need to terminate the process
 taskkill /F /IM run.exe
 ```
 
-### Step 12: Final Verification and Packaging
+### Step 13: Final Verification and Packaging
 ```powershell
 # 12.1 Return to root
 cd ..
 
 # 12.2 Verify created file
 Get-ChildItem *.zip
+
+# 12.3 Alternative CMD Windows verification
+dir /s *.zip
 ```
 
 ## 🔧 Troubleshooting Commands

@@ -8,7 +8,7 @@ sys.setrecursionlimit(sys.getrecursionlimit() * 5)
 block_cipher = None
 
 a = Analysis(
-    ['run_dashboard.py'],
+    ['run.py'],      # UPDATE THE NAME WITH THE project_name.py 
     pathex=['.'],
     binaries=[],
     datas=[
