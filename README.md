@@ -197,4 +197,5 @@ Remove-Item -Recurse -Force build, dist -ErrorAction SilentlyContinue
 # Verify cleanup
 Get-ChildItem -Force
 ``` 
-
+## Author
+Developed by [Weverson Barbieri de Oliveira](https://github.com/weversonbarbieri)
