@@ -12,11 +12,12 @@ executable_file_template/
 ├── build/                    # Build artifacts (created during compilation)
 ├── data/
 │   └── file.csv             # Sample data file
-├── dist/                     # Distribution folder (final executable location)
+├── dist/                     # Distribution folder (final executable directory)
 ├── hooks/
 │   └── hook-streamlit.py    # PyInstaller hook for Streamlit
 ├── venv/                     # Virtual environment (for development)
-├── main.py                   # Main application file
+├── main.py                   # IMPORTANT! main.py MUST BE always in the projects' root
+├── utils.py                  # (When the project HAS utils.py) IMPORTANT! utils.py MUST BE always in the projects' root
 ├── README.md                 # Project documentation
 ├── requirements.txt          # Python dependencies
 ├── run.py                    # Script to run the application
@@ -87,37 +88,25 @@ Get-ChildItem -Force
 
 ### Step 7: Create run.spec File 
 
-### Step 8: Modify Your .main File (Add get_data_path function)
+### Step 8: Modify Your .main File to add get_data_path function (if needed) (main.py MUST BE always in the projects' root)
 
 ### Step 9: Check the Ports (8502) in use (VERY IMPORTANT!!!!)
 
 ```powershell
-# 8.1 Check if port is in use
+# 9.1 Check if port is in use
 netstat -ano | findstr :8502
 
-# 8.2 If there's a running process, terminate it
+# 9.2 If there's a running process, terminate it
 taskkill /F /IM run.exe
 
-# 8.3 Verify again
+# 9.3 Verify again
 netstat -ano | findstr :8502
 
-# 8.4 Alternative cleanup using CMD on Windows
+# 9.4 Alternative cleanup using CMD on Windows
 rmdir /s /q build dist 2>nul
 ```
 
-### Step 10: Complete Cleaning (Historic Method)
-```powershell
-# 9.1 PowerShell specific cleaning
-Remove-Item -Recurse -Force build, dist -ErrorAction SilentlyContinue
-
-# 9.2 Verify cleaning
-Get-ChildItem -Force
-
-# 9.3 Alternative verification using CMD on Windows
-dir /a
-```
-
-### Step 11: Build the Executable (With Detailed Log)
+### Step 10: Build the Executable (With Detailed Log)
 ```powershell
 # 10.1 Build with detailed information
 pyinstaller run.spec --log-level INFO
@@ -132,7 +121,21 @@ pyinstaller run.spec --log-level DEBUG
 Get-ChildItem dist
 ```
 
-### Step 12: Test the Executable
+## Other Important Steps:
+
+### Complete Cleaning (If needed)
+```powershell
+# 9.1 PowerShell specific cleaning
+Remove-Item -Recurse -Force build, dist -ErrorAction SilentlyContinue
+
+# 9.2 Verify cleaning
+Get-ChildItem -Force
+
+# 9.3 Alternative verification using CMD on Windows
+dir /a
+```
+
+### Test the Executable
 ```powershell
 # 11.1 Navigate to dist folder
 cd dist
@@ -150,7 +153,7 @@ Get-ChildItem
 taskkill /F /IM run.exe
 ```
 
-### Step 13: Final Verification and Packaging
+### Final Verification and Packaging
 ```powershell
 # 12.1 Return to root
 cd ..

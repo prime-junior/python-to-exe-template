@@ -27,11 +27,12 @@ a = Analysis(
         
         # MAIN FILE (CHANGE THE NAME HERE)
         ('main.py', '.'),
+        ('utils.py', '.'), (WHEN THE PROJECT HAS UTILS)
         
         # STREAMLIT SETTINGS
         ('.streamlit/config.toml', '.streamlit')
-    ] + copy_metadata('streamlit') + copy_metadata('pandas') + copy_metadata('matplotlib'),
-    hiddenimports=[
+    ] + copy_metadata('streamlit') + copy_metadata('pandas') + copy_metadata('matplotlib'), (include ALL NEEDED LIBRARIES to run the project)
+    hiddenimports=[ (include ALL NEEDED LIBRARIES to run the project)
         'streamlit', 
         'pandas',
         'streamlit.web.cli',
